@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>^_^</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/overlap.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" src="js/jquery.overlap.js"></script>
+</head>
+<body>
+	<div class="topbar"><a hidefocus href="index.html" class="logo"><span>^_^</span></a></div>
+	<div class="aside">
+		<div class="aside-tbar ui-bar search-bar">
+			<div class="search-box">
+				<div class="search-box-inner">
+					<input type="text" placeholder="filter">
+				</div>
+			</div>
+		</div>
+		<div class="items">
+			<!-- loading... -->
+		</div>
+		<div class="aside-bbar ui-bar tar">
+			<div class="buttons">
+				<a hidefocus class="ui-btn" href="javascript:;">new contact</a>
+			</div>
+		</div>
+		<div class="aside-split"></div>
+	</div>
+	<div class="content">
+		<div class="overlap-area product-space" style="padding:12px">
+			<ul class="product-list products clearfix">
+			</ul>
+			<div class="loading tac enable-selectstart">加载更多</div>
+		</div>
+		<!-- <div class="overlap-area product-space" style="padding:12px">
+			<ul class="product-list products clearfix">
+			</ul>
+			<div class="loading tac enable-selectstart">加载更多</div>
+		</div> -->
+	</div>
+	<style type="text/css">
+		.items .subitems { padding-left: 2em }
+		.items .item, .items .subitem { margin-bottom: 4px }
+	</style>
+</body>
+<script type="text/x-jquery-tmpl" id="products-tmpl">
+	<li class="overlap-item">
+		<a>
+			<img src="${src}">
+			<div>${description}</div>
+		</a>
+	</li>
+</script>
+<script type="text/javascript">
+	// function getUsers() {
+	// 	$.ajax({
+	// 		dataType:'json',
+	// 		url:'data/items.json',
+	// 		success:function (response) {
+	// 			$('.items').append($('#items-tmpl').tmpl(response.items))
+	// 		},
+	// 		error:function() {}
+	// 	})
+	// }
+	function getProducts(start,limit) {
+		$.ajax({
+			dataType:'json',
+			url:'data/products.json',
+			success:function (response) {
+				$('.products').append($('#products-tmpl').tmpl(response.products));
+				$('.overlap-area').overlap({
+					overlapArea: document,
+					shiftKey:true
+				});
+			},
+			error:function() {}
+		})
+	}
+	// getUsers();
+	getProducts();
+	$(document).on('click','.loading',function (e) {
+		getProducts();
+		e.stopPropagation()
+	})
+	window.onscroll = function () {
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		var clientHeight = document.documentElement.clientHeight;
+		var scrollHeight = document.documentElement.scrollHeight;
+		if (scrollTop + clientHeight == scrollHeight) {
+			// getProducts();
+		}
+	}
+
+	function getSelectedText() {
+	    if (window.getSelection) {
+	        // This technique is the most likely to be standardized.
+	        // getSelection() returns a Selection object, which we do not document.
+	        return window.getSelection().toString();
+	    }
+	    else if (document.getSelection) {
+	        // This is an older, simpler technique that returns a string
+	        return document.getSelection();
+	    }
+	    else if (document.selection) {
+	        // This is the IE-specific technique.
+	        // We do not document the IE selection property or TextRange objects.
+	        return document.selection.createRange().text;
+	    }
+	}
+</script>
+</html>

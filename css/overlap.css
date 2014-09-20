@@ -1,0 +1,16 @@
+.overlap-box {
+	top: -100%;
+	left: -100%;
+	cursor: default;
+	display: none;
+	position: absolute;
+	border:1px solid rgb(23, 171, 255);
+	background: rgba(34, 149, 255, 0.3);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#302295FF', endColorstr='#302295FF')
+}
+.disableselectstart {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
