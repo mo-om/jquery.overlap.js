@@ -9,9 +9,9 @@
 	var util = (function() {
 		return {
 			/**
-			* 模拟生成guid
-			* @return {String} 返回模拟生成的guid
-			*/
+			 * 模拟生成guid
+			 * @return {String} 返回模拟生成的guid
+			 */
 			guid: function(){
 				return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 					var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -20,9 +20,9 @@
 			},
 
 			/**
-			* 获取web应用的basepath
-			* @return {String} 返回web应用的basepath
-			*/ 
+			 * 获取web应用的basepath
+			 * @return {String} 返回web应用的basepath
+			 */ 
 			getBasePath: function () {
 				var loc = window.location
 				, path = loc.protocol + '//' + loc.host + loc.pathname;
@@ -30,20 +30,20 @@
 			},
 
 			/**
-			* 获取url中指定参数的值
-			* @param  {String} name 指定的参数名
-			* @return {String}      返回url中指定参数的值，如果没有则返回空字符串
-			*/
+			 * 获取url中指定参数的值
+			 * @param  {String} name 指定的参数名
+			 * @return {String}      返回url中指定参数的值，如果没有则返回空字符串
+			 */
 			getQueryString: function (name) {
 				var reg = new RegExp('(^|\\?|&)'+ name +'=([^&]*)(\\s|&|$)', 'i');  
 				return reg.test(location.href) ? unescape(RegExp.$2.replace(/\+/g, ' ')) : '';
 			}, 
 
 			/**
-			* 检测某个url是否跨域
-			* @param  {String} url 需要检测的url
-			* @return {Boolean}    检测结果为跨域则返回true，否则返回false
-			*/
+			 * 检测某个url是否跨域
+			 * @param  {String} url 需要检测的url
+			 * @return {Boolean}    检测结果为跨域则返回true，否则返回false
+			 */
 			isCrossDomain: function (url) {
 				var loc = window.location
 				, patt = new RegExp('^' + loc.protocol + '//' + loc.host);
@@ -51,11 +51,11 @@
 			},
 
 			/**
-			* 匹配任意指定的字符串
-			* @param  {String} string 任意指定字符串
-			* @param  {string} word   需要进行对比匹配的字符串
-			* @return {Boolean}       有匹配结果则返回true，否则返回false
-			*/
+			 * 匹配任意指定的字符串
+			 * @param  {String} string 任意指定字符串
+			 * @param  {string} word   需要进行对比匹配的字符串
+			 * @return {Boolean}       有匹配结果则返回true，否则返回false
+			 */
 			match: function (string, word) {
 				var len = string.length
 				, sub = word.substr(0, len);
@@ -63,10 +63,10 @@
 			},
 
 			/**
-			* 按需载入javascript文件
-			* @param    {Array/String} urls javascript文件的url地址
-			* @callback {Function}          回调函数
-			*/
+			 * 按需载入javascript文件
+			 * @param    {Array/String} urls javascript文件的url地址
+			 * @callback {Function}          回调函数
+			 */
 			loadScript: function (urls,callback) {
 				// 传入单个文件url时数组不必
 				if( !(urls instanceof Array) ){
@@ -94,10 +94,10 @@
 			},
 
 			/**
-			* 按需载入javascript文件
-			* @param    {Array/String} urls javascript文件的url地址
-			* @callback {Function}          回调函数
-			*/
+			 * 按需载入javascript文件
+			 * @param    {Array/String} urls javascript文件的url地址
+			 * @callback {Function}          回调函数
+			 */
 			$loadScript: function (urls,callback) {
 				if(!$.isArray(urls)){
 					urls = [urls]
