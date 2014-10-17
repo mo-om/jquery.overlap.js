@@ -12,7 +12,7 @@
 			 * 模拟生成guid
 			 * @return {String} 返回模拟生成的guid
 			 */
-			guid: function() {
+			guid: function () {
 				return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 					var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 					return v.toString(16);
@@ -69,7 +69,7 @@
 			 */
 			loadScript: function (urls, callback) {
 				// 传入单个文件url时数组不必
-				if( !(urls instanceof Array) ){
+				if( !(urls instanceof Array) ) {
 					urls = [urls]
 				}
 				callback = callback || function() {};
@@ -99,7 +99,7 @@
 			 * @callback {Function}          回调函数
 			 */
 			$loadScript: function (urls, callback) {
-				if(!$.isArray(urls)){
+				if(!$.isArray(urls)) {
 					urls = [urls]
 				}
 				callback = callback || function() {}
