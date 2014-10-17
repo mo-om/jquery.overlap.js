@@ -51,7 +51,7 @@
 			},
 
 			/**
-			 * 匹配任意指定的字符串
+			 * 在一个字符串中查找指定的字符串从0开始
 			 * @param  {String} string 任意指定字符串
 			 * @param  {String} word   需要进行对比匹配的字符串
 			 * @return {Boolean}       有匹配结果则返回true，否则返回false
