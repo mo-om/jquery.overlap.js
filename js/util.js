@@ -53,7 +53,7 @@
 			/**
 			 * 匹配任意指定的字符串
 			 * @param  {String} string 任意指定字符串
-			 * @param  {string} word   需要进行对比匹配的字符串
+			 * @param  {String} word   需要进行对比匹配的字符串
 			 * @return {Boolean}       有匹配结果则返回true，否则返回false
 			 */
 			match: function (string, word) {
@@ -69,7 +69,7 @@
 			 */
 			loadScript: function (urls, callback) {
 				// 传入单个文件url时数组不必
-				if( !(urls instanceof Array) ) {
+				if( !(urls instanceof Array) ){
 					urls = [urls]
 				}
 				callback = callback || function() {};
@@ -99,14 +99,14 @@
 			 * @callback {Function}          回调函数
 			 */
 			$loadScript: function (urls, callback) {
-				if(!$.isArray(urls)) {
+				if(!$.isArray(urls)){
 					urls = [urls]
 				}
 				callback = callback || function() {}
 				var i = 0, len = urls.length, last = len - 1;
 				for (; i < len; i++) {
 					(function (i) {
-						$.getScript(urls[i],function (script, textStatus, jqXHR) {
+						$.getScript(urls[i], function (script, textStatus, jqXHR) {
 							i === last && callback();
 						})
 					})(i)
