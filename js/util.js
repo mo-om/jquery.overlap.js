@@ -67,7 +67,7 @@
 			 * @param    {Array/String} urls javascript文件的url地址
 			 * @callback {Function}          回调函数
 			 */
-			loadScript: function (urls,callback) {
+			loadScript: function (urls, callback) {
 				// 传入单个文件url时数组不必
 				if( !(urls instanceof Array) ){
 					urls = [urls]
@@ -98,7 +98,7 @@
 			 * @param    {Array/String} urls javascript文件的url地址
 			 * @callback {Function}          回调函数
 			 */
-			$loadScript: function (urls,callback) {
+			$loadScript: function (urls, callback) {
 				if(!$.isArray(urls)){
 					urls = [urls]
 				}
