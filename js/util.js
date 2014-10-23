@@ -1,8 +1,8 @@
-/**
+/*!
  * 通用工具函数util.js
  * @author mo-om
- * @requires jQuery
  * @namespace util
+ * @dependence jQuery
  * @return {Object} 返回通用的util组件接口
  */
 ;(function($,window,document,undefined) {
@@ -24,8 +24,8 @@
 			 * @return {String} 返回web应用的basepath
 			 */ 
 			getBasePath: function () {
-				var loc = window.location
-				, path = loc.protocol + '//' + loc.host + loc.pathname;
+				var loc = window.location,
+					path = loc.protocol + '//' + loc.host + loc.pathname;
 				return loc.href.substring(0, path.lastIndexOf('/'));
 			},
 
@@ -45,8 +45,8 @@
 			 * @return {Boolean}    检测结果为跨域则返回true，否则返回false
 			 */
 			isCrossDomain: function (url) {
-				var loc = window.location
-				, patt = new RegExp('^' + loc.protocol + '//' + loc.host);
+				var loc = window.location,
+					patt = new RegExp('^' + loc.protocol + '//' + loc.host);
 				return patt.test(url) ? false : true;
 			},
 
@@ -57,29 +57,38 @@
 			 * @return {Boolean}       有匹配结果则返回true，否则返回false
 			 */
 			match: function (string, word) {
-				var len = string.length
-				, sub = word.substr(0, len);
+				var len = string.length,
+					sub = word.substr(0, len);
 				return string.toUpperCase() === sub.toUpperCase();
 			},
 
 			/**
-			 * 按需载入javascript文件
-			 * @param    {Array/String} urls javascript文件的url地址
-			 * @callback {Function}          回调函数
+			 * 提取字符串中body标签之间的内容
+			 * @param  {String} html html内容
+			 * @return {String}      若有匹配则返回第一个子匹配，否则原样返回
 			 */
-			loadScript: function (urls, callback) {
+			 extractor: function (html) {
+			 	var patt = /<body[^>]*>((.|[\n\r])*)<\/body>/im,
+			 		matches = patt.exec(html);
+		 		return matches ? matches[1] : html;
+			 },
+
+			/**
+			 * 按需载入javascript文件
+			 * @param {Array/String} url      javascript文件的url地址
+			 * @param {Function}     callback 回调函数
+			 */
+			loadScript: function (url, callback) {
 				// 传入单个文件url时数组不必
-				if( !(urls instanceof Array) ){
-					urls = [urls]
-				}
+				url = (url instanceof Array) ? url : [url];
 				callback = callback || function() {};
-				var i = 0, len = urls.length, last = len - 1,
+				var i = 0, len = url.length, last = len - 1,
 				head = document.getElementsByTagName('head')[0] || document.documentElement;
 				for (; i < len; i++) {
 					(function (i) {
 						var script = document.createElement('script');
 						script.type = 'text/javascript';
-						script.src = urls[i];
+						script.src = url[i];
 						script.onload = script.onreadystatechange = function() {
 							// Attach handlers for all browsers
 							if(!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
@@ -95,18 +104,16 @@
 
 			/**
 			 * 按需载入javascript文件
-			 * @param    {Array/String} urls javascript文件的url地址
-			 * @callback {Function}          回调函数
+			 * @param {Array/String} url      javascript文件的url地址
+			 * @param {Function}     callback 回调函数
 			 */
-			$loadScript: function (urls, callback) {
-				if(!$.isArray(urls)){
-					urls = [urls]
-				}
-				callback = callback || function() {}
-				var i = 0, len = urls.length, last = len - 1;
+			$loadScript: function (url, callback) {
+				url = $.isArray(url) ? url : [url];
+				callback = callback || function() {};
+				var i = 0, len = url.length, last = len - 1;
 				for (; i < len; i++) {
 					(function (i) {
-						$.getScript(urls[i], function (script, textStatus, jqXHR) {
+						$.getScript(url[i], function (script, textStatus, jqXHR) {
 							i === last && callback();
 						})
 					})(i)
